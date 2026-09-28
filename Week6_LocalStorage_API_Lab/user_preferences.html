@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Local Storage - User Preferences</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body.dark-mode {
+            background-color: #212529;
+            color: white;
+        }
+
+        body.dark-mode .card {
+            background-color: #343a40;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="bg-primary text-white text-center p-4">
+        <h1>Week 6 Laboratory</h1>
+        <p>Client-Side Storage & API Integration</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+
+            <a class="navbar-brand" href="index.html">Week 6 Lab</a>
+
+            <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="local_storage.html">Local Storage</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="user_preferences.html">
+                            User Preferences
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="weather_api.html">Weather</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="map_api.html">Maps</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="github_api.html">GitHub</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+
+        <div class="row justify-content-center">
+
+            <div class="col-md-6">
+
+                <div class="card shadow p-4">
+
+                    <h2 class="text-center mb-4">
+                        Choose Your Preferences
+                    </h2>
+
+                    <!-- Theme -->
+                    <div class="mb-3">
+                        <label for="theme" class="form-label">
+                            Theme:
+                        </label>
+
+                        <select id="theme" class="form-select">
+                            <option value="light">Light Mode</option>
+                            <option value="dark">Dark Mode</option>
+                        </select>
+                    </div>
+
+                    <!-- Language -->
+                    <div class="mb-3">
+                        <label for="language" class="form-label">
+                            Language:
+                        </label>
+
+                        <select id="language" class="form-select">
+                            <option value="en">English</option>
+                            <option value="es">Spanish</option>
+                        </select>
+                    </div>
+
+                    <!-- Button -->
+                    <button class="btn btn-primary w-100"
+                        onclick="savePreferences()">
+                        Save Preferences
+                    </button>
+
+                    <p id="message" class="text-center mt-3"></p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center p-3">
+        <p class="mb-0"> Elyza Marie D. Boro | BSIS 2A</p>
+    </footer>
+
+
+    <!-- JavaScript -->
+    <script>
+
+        function savePreferences() {
+
+            let theme = document.getElementById("theme").value;
+            let language = document.getElementById("language").value;
+
+            localStorage.setItem("theme", theme);
+            localStorage.setItem("language", language);
+
+            applyPreferences();
+
+            document.getElementById("message").innerText =
+                "Preferences Saved!";
+        }
+
+
+        function applyPreferences() {
+
+            let savedTheme = localStorage.getItem("theme");
+            let savedLanguage = localStorage.getItem("language");
+
+            if (savedTheme === "dark") {
+
+                document.body.classList.add("dark-mode");
+
+            } else {
+
+                document.body.classList.remove("dark-mode");
+
+            }
+
+            document.getElementById("theme").value =
+                savedTheme || "light";
+
+            document.getElementById("language").value =
+                savedLanguage || "en";
+        }
+
+
+        applyPreferences();
+
+    </script>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
